@@ -4,6 +4,7 @@ import ScreenContainer from '../../components/shared/ScreenContainer';
 import Loader from '../../components/shared/Loader';
 import CreatePost from '../../components/Post/CreatePost';
 import { Card } from 'react-native-elements';
+import PostItem from '../../components/Post/PostItem';
 
 const NewsFeed = () => {
   const [posts, setPosts] = useState([]);
@@ -29,13 +30,7 @@ const NewsFeed = () => {
             <Loader color="#0f0f0f" size="large" />
           </View>
         ) : (
-          posts.map((post) => (
-            <Card key={post.id}>
-              <Card.Title>{post.title}</Card.Title>
-              <Card.Divider />
-              <Text>{post.body}</Text>
-            </Card>
-          ))
+          posts.map((post) => <PostItem key={post.id} post={post} />)
         )}
       </ScrollView>
     </ScreenContainer>
