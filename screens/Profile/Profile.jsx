@@ -5,8 +5,7 @@ import { useAuth } from '../../hooks/useAuth';
 import ScreenContainer from '../../components/shared/ScreenContainer';
 
 const Profile = () => {
-  const { logout } = useAuth();
-  const [user, setUser] = useState(null);
+  const { logout, user } = useAuth();
 
   return (
     <ScreenContainer>
@@ -20,9 +19,7 @@ const Profile = () => {
             }}
           />
           <View style={{ marginLeft: 10 }}>
-            <Text style={{ fontSize: 18, marginBottom: 10 }}>
-              Moniruzzaman Saikat
-            </Text>
+            <Text style={{ fontSize: 18, marginBottom: 10 }}>{user.name}</Text>
             <Button title="Logout" onPress={logout} />
           </View>
         </View>

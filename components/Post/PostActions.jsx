@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
-import { Icon, Overlay } from 'react-native-elements';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import { Icon } from 'react-native-elements';
 import { useState } from 'react';
 
 const PostActions = () => {
@@ -22,7 +22,7 @@ const PostActions = () => {
           type="ionicon"
           color={liked ? 'red' : 'blue'}
         />
-        <Text style={{ marginLeft: 5 }}>1048</Text>
+        <Text style={styles.likesCountText}>1048</Text>
       </TouchableOpacity>
 
       {/* share and bookmark buttons */}
@@ -45,5 +45,13 @@ const PostActions = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  likesCountText: {
+    fontSize: 14,
+    marginLeft: 2,
+    fontWeight: 'bold',
+  },
+});
 
 export default PostActions;

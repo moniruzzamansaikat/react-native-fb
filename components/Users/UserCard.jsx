@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { Avatar, Button, Card } from 'react-native-elements';
 
-const UserCard = () => {
+const UserCard = ({ user }) => {
   return (
     <Card>
       <View style={styles.container}>
@@ -15,7 +15,7 @@ const UserCard = () => {
         />
 
         <View style={styles.content}>
-          <Text style={styles.nameStyle}>Moniruzzaman Saikat</Text>
+          <Text style={styles.nameStyle}>{user.name}</Text>
           <Button title={'Add Friend'} containerStyle={styles.buttonStyle} />
         </View>
       </View>

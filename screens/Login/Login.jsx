@@ -5,21 +5,16 @@ import Loader from '../../components/shared/Loader';
 import { useAuth } from '../../hooks/useAuth';
 
 function Login({ navigation }) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const { login } = useAuth();
+  const { login, fetching } = useAuth();
 
   const handleLoginSubmit = () => {
-    if (!email || !password) {
-      alert('Email and password are required');
-      return;
+    if (!username || !password) {
+      return alert('Username and password are required');
     }
-    login({ email, password }).catch((error) => {
-      alert(error);
-      setEmail('');
-      setPassword('');
-    });
+
+    login({ username, password });
   };
 
   return (
@@ -29,32 +24,38 @@ function Login({ navigation }) {
           style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}
         >
           <Input
-            placeholder="Email"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
+            label="Username"
+            placeholder="Enter your username"
+            value={username}
+            onChangeText={(text) => setUsername(text)}
             leftIcon={<Icon name="mail-outline" style={{ marginRight: 5 }} />}
           />
           <Input
+            label="Password"
             value={password}
             secureTextEntry
-            placeholder="Password"
+            placeholder="Enter your password"
             onChangeText={(text) => setPassword(text)}
             leftIcon={<Icon name="lock-outline" style={{ marginRight: 5 }} />}
           />
           <Button
             onPress={handleLoginSubmit}
-            title={submitting ? <Loader /> : 'Login'}
+            title={fetching ? <Loader /> : 'Login'}
             buttonStyle={{
               padding: 10,
               paddingHorizontal: 20,
               backgroundColor: '#6EBF8B',
             }}
-            icon={{
-              name: 'log-in',
-              type: 'ionicon',
-              size: 20,
-              color: 'white',
-            }}
+            icon={
+              fetching
+                ? null
+                : {
+                    name: 'log-in',
+                    type: 'ionicon',
+                    size: 20,
+                    color: 'white',
+                  }
+            }
             iconRight
           />
         </View>

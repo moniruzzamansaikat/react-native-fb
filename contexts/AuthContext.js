@@ -1,29 +1,48 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { fetchUser, loginUser, signUpUser } from "../adapter/authAdapter";
 
 export const AuthContext = createContext();
 
-// mock login data
-const mockUser = {
-    email: 'secret@gmail.com',
-    password: 'saikat123@'
-}
-
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState({ name: 'saiakt' });
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+    const [fetching, setFetching] = useState(false);
+    const authenticated = token !== null;
 
-    const authenticated = user !== null;
-    const logout = () => setUser(null);
+    const logout = () => {
+        setUser(null);
+        setToken(null);
+    };
+
+    useEffect(() => {
+        if (token) {
+            fetchUser(token).then(user => {
+                setUser(user);
+            })
+        }
+    }, [token])
 
     const login = (user) => {
-        return new Promise((resolve, reject) => {
-            if (user.email === mockUser.email && user.password === mockUser.password) {
-                setUser(user);
-                resolve();
-            } else {
-                reject('Invalid credentials');
-            }
+        setFetching(true);
+        loginUser(user).then(result => {
+            setFetching(false);
+            setToken(result.token);
+        }).catch(error => {
+            setFetching(false);
+            alert(error.message);
         })
     };
 
-    return <AuthContext.Provider value={{ authenticated, user, logout, login }}>{children}</AuthContext.Provider>
+    const signUp = (data) => {
+        setFetching(true);
+        signUpUser(data).then(result => {
+            setFetching(false);
+            setToken(result.token);
+        }).catch(error => {
+            setFetching(false);
+            alert(error);
+        })
+    }
+
+    return <AuthContext.Provider value={{ authenticated, fetching, setFetching, user, logout, login, signUp, token }}>{children}</AuthContext.Provider>
 }
