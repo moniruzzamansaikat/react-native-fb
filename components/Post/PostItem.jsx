@@ -1,17 +1,16 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Icon, Avatar } from 'react-native-elements';
+import PostActions from './PostActions';
+import PostItemHeader from './PostItemHeader';
 
 const PostItem = ({ post }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Card key={post.id}>
-        <View style={styles.postHeader}>
-          <Text style={styles.postTitle}>Moniruzzaman Saikat added photo</Text>
-          <Text style={styles.postAddedTime}>2h ago</Text>
-        </View>
+        <PostItemHeader />
         <Card.Divider />
-        <Text style={styles.postText}>With Shafin 💘</Text>
+
         <Image
           style={{
             width: '100%',
@@ -24,41 +23,15 @@ const PostItem = ({ post }) => {
         />
 
         <Card.Divider />
-
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            maxWidth: '100%',
-          }}
-        >
-          <Button buttonStyle={styles.buttonStyle} title="Like" />
-          <Button buttonStyle={styles.buttonStyle} title="Comment" />
-          <Button buttonStyle={styles.buttonStyle} title="Share" />
-        </View>
+        <PostActions />
       </Card>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  postHeader: {
-    marginBottom: 10,
-  },
-
-  postTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-
-  postAddedTime: { fontSize: 12 },
-
-  postText: {
-    marginBottom: 10,
-  },
-
-  buttonStyle: {
-    color: 'black',
+  container: {
+    marginBottom: 20,
   },
 });
 

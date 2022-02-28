@@ -12,7 +12,7 @@ const NewsFeed = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=8')
+    fetch('https://jsonplaceholder.typicode.com/posts?_limit=1')
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
