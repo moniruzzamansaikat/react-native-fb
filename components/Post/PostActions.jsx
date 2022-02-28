@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const PostActions = () => {
   const [liked, setLiked] = useState(true);
+  const [saved, setSaved] = useState(true);
 
   return (
     <View
@@ -34,8 +35,11 @@ const PostActions = () => {
             <Icon name="share-social-outline" type="ionicon" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon name="bookmark-outline" type="ionicon" />
+        <TouchableOpacity onPress={() => setSaved(!saved)}>
+          <Icon
+            name={`${saved ? 'bookmark' : 'bookmark-outline'}`}
+            type="ionicon"
+          />
         </TouchableOpacity>
       </View>
     </View>

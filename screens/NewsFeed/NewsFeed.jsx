@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import ScreenContainer from '../../components/shared/ScreenContainer';
 import Loader from '../../components/shared/Loader';
 import CreatePost from '../../components/Post/CreatePost';
-import { Card } from 'react-native-elements';
 import PostItem from '../../components/Post/PostItem';
 
 const NewsFeed = () => {
@@ -12,7 +11,7 @@ const NewsFeed = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=1')
+    fetch('https://jsonplaceholder.typicode.com/posts?_limit=2')
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
